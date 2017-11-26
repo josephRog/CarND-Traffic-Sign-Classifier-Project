@@ -104,7 +104,7 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-In order to train the model I used a batch size of 64, learing rate of 0.001, and epoch count of 100. I switched to a batch size of 64 since it worked fine on my computer and allowed me to train using more data at once. I experimented with changing the learning rate from the default value of 0.001 with mixed results. Initially I thought about using a slower learning rate with more epochs but this led to the model finding local maxima too easily. Using a higher learing rate made the model converge much faster but to a worse accuray than before. I experimented with many different values of epochs and eventually settled on 100. This allowed the network to be completely trained in about 5 minutes. When training the network I noticed that the validation accuracy always seemed to stop improving around epoch 60 to 80. I decided to let it go out to 100 on the off chance that it discovered some better weight but didn't see much point in continuing after that.
+In order to train the model I used a batch size of 64, learing rate of 0.001, and epoch count of 100. I switched to a batch size of 64 since it worked fine on my computer and allowed me to train using more data at once. I experimented with changing the learning rate from the default value of 0.001 with mixed results. Initially I thought about using a slower learning rate with more epochs but this led to the model finding local maxima too easily. Using a higher learing rate made the model converge much faster but to a worse accuray than before. I experimented with many different values of epochs and eventually settled on 100. This allowed the network to be completely trained in about 5 minutes on an NVIDIA GTX 980ti. When training the network I noticed that the validation accuracy always seemed to stop improving around epoch 60 to 80. I decided to let it go out to 100 on the off chance that it discovered some better weight but didn't see much point in continuing after that.
 
 As I trained the network trying to find better values for hyperparameters, I noticed that the results sometimes fluctuated quite a bit, and often the best network was actually NOT produced during the final epoch. This gave me the idea of only saving the network that had given the best validation accuracy instead of saving the network produced during the final epoch. I expanded on this idea but training the network from scratch several times and comparing the best results for each of those training runs. This allowed me to train a network with a high accuracy much more reliably.
 
@@ -114,19 +114,21 @@ My final model results were:
 * validation set accuracy of ? 
 * test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-#### Answer: I began by using the default LeNet architecture. I changed it slighly so as to accept grayscale images and to output to 43 different class types.
+#### If an iterative approach was chosen:
+#### * What was the first architecture that was tried and why was it chosen? 
+I began by using the default LeNet architecture. I changed it slighly so as to accept grayscale images and to output to 43 different class types.
 
-* What were some problems with the initial architecture?
-#### Answer: Some problems with the initial architecture was that it didn't have any dropout. I was concered that this would lead to overfitting on the training data. 
+#### * What were some problems with the initial architecture?
+Some problems with the initial architecture was that it didn't have any dropout. I was concered that this would lead to overfitting on the training data. 
 
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-#### Answer: As I mentioned before, the lack of a dropout layer made me worry about overfitting to the training data. I added a dropout layer just before the final output to address this. When training it had a 50% chance to drop nodes. I also added an extra fully connected layer to reduce the rate at which the number of layer outputs was decreased. This did not conclusively chance the performance of the network for better or for worse.
+#### * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+As I mentioned before, the lack of a dropout layer made me worry about overfitting to the training data. I added a dropout layer just before the final output to address this. When training it had a 50% chance to drop nodes. I also added an extra fully connected layer to reduce the rate at which the number of layer outputs was decreased. This did not conclusively chance the performance of the network for better or for worse.
 
-* Which parameters were tuned? How were they adjusted and why?
+#### * Which parameters were tuned? How were they adjusted and why?
+I experimented at length with tuning all of the models hyperparameters. Learning rate ended staying at the default of 0.001 but I reduced batch size to 64, and increased epochs to 100. This was to give the model more time to converge and allow it to train with more of the data at once during a given epoch.
 
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+#### * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+I think it makes a lot of since to use convolution layers to help make a good model for this problem. Having a convolutional nearual network should allow for much more flexibility with being able to identify and classify a sign in a picture even if the picture is not ideal. Specifically, a sign should able to be able to be recognized and classified independent of its location, rotation or scale within the image frame. The images provided as training for this project seemed to all be centered on the sign and of the same scale and orientation. However this will likely not always be the case.
 
 ### Test a Model on New Images
 
