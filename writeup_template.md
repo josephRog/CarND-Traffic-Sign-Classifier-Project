@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 [image2]: ./report_images/orig.png "Original Image"
 [image3]: ./report_images/processed.png "Processed Image"
 [image4]: ./report_images/new_signs.png "New Signs"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
+[image5]: ./report_images/sign_predictions.png "Sign Predictions"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
@@ -125,7 +125,7 @@ Here are eight German traffic signs that I found on the web. I cropped them to b
 
 ![alt text][image4]
 
-Some of these images may be more difficult to classify than the average sign from the training set due to their scale and orientation. For example the stop sign and roundabout sign actually extend slightly outside of the frame. 
+Some of these images may be more difficult to classify than the average sign from the training set due to their scale and orientation. For example the stop sign and roundabout sign actually extend slightly outside of the frame. Additionally the 3rd picture (Wild animals crossing) is at a not insignificant angle.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -133,26 +133,28 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Yield      		| Yield  									| 
+| General caution     			| General caution 										|
+| Wild animals crossing				| Slippery road										|
+| Road work	      		| Road work					 				|
+| Pedestrians			| Pedestrians      							|
+| Stop			| Yield      							|
+| Roundabout mandatory	| Right-of-way at the next intersection      							|
+| Keep right			| Keep right      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 5 of the 8 traffic signs, which gives an accuracy of 62.5%. This is far worse than the test set, but closer inspection reveals some interesting details about how it could be improved. The wild animal crossing, stop, and roundabout signs were all mispredicted.
+
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+This image shows the softmax probablities across all of the possible labels for each of the new sign images.
+![alt text][image5]
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+Surprisingly, the model is extreamly confident, even is cases where it is wrong. The only sign that has secondary softmax readings that even show up at this scale is the stop sign (which it guessed wrong). I find this extreamly interesting. When looking closer at all of the mispredicted signs, its interesting to see how they were misclassified. 
 
+In the case of the 'Wild animals crossing', the network classified it as 'slippery road'. I think this is very interesting to notice, because even to me, these road signs do look a LOT like each other. Both of them are a triangle in the same orientaion, and both also have a wide black shape that is rotated the same way.
 
-For the second image ... 
+For the stop sign, I was quite surprised to see this one fail. The fact that it was mispredicted as the yield sign doesn't make much sense to me, since they arn't even the same shape. I would have been less surprised if it was classified as a sign that was round. Part of the problem with this sign may be that the sign is so large, that it actually extends slightly outside of the image frame. It's possible that the network could be made more robust to this by creating extra data with heavly randomized scales for every class of image.
+
+Finally, the roundabout sign was mispredicted as keep right. Again, this is an image that like the stop sign, extended slightly outside of the frame boundary. It's possible that this contributed to its misprediction. It does share some similarities to keep right in that that both have an arrow in the same orientation. Furthermore when the sign is scaled this way, the scale of the arrows in the roundabout actually match fairly well the to relative arrow size in the keep right training examples.
