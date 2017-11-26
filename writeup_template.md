@@ -18,8 +18,8 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./report_images/hist.png "Histogram"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
+[image2]: ./report_images/orig.png "Original Image"
+[image3]: ./report_images/processed.png "Processed Image"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
@@ -62,20 +62,8 @@ After I loaded the images from the data set, I chose to convert them to grayscal
 
 I experimented with augmenting the data by adding random rotation, translation and scale to the signs, but it did not end up making a noticable difference in the accuracy of the network. It did however make it take significantly longer to run the calculations when training the network. At a result, I did not include these operations in the final version of the project.
 
+#### Before and after image processing:
 ![alt text][image2]
-
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
@@ -110,8 +98,8 @@ As I trained the network trying to find better values for hyperparameters, I not
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* validation set accuracy of ? 
-* test set accuracy of ?
+* validation set accuracy of 0.959 
+* test set accuracy of 0.936
 
 #### If an iterative approach was chosen:
 #### * What was the first architecture that was tried and why was it chosen? 
@@ -133,12 +121,12 @@ I think it makes a lot of since to use convolution layers to help make a good mo
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are eight German traffic signs that I found on the web. I cropped them to be square and then sized down to 32x32x3 using GNU Gimp:
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
 
-The first image might be difficult to classify because ...
+Some of these images may be more difficult to classify than the average sign from the training set due to their scale and orientation. For example the stop sign and roundabout sign actually extend slightly outside of the frame. 
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
