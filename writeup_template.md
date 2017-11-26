@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./report_images/hist.jpg "Histogram"
+[image1]: ./report_images/hist.png "Histogram"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
@@ -52,7 +52,7 @@ In order to get some simple statistics about the data set, I simply inspected th
 
 This is a histogram showing the distribution of labels in the training set. Certain signs appear many for times in the dataset than others.
 
-![alt text][image1]
+![hist.png][image1]
 
 ### Design and Test a Model Architecture
 
