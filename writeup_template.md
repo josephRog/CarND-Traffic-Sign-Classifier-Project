@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
+[image1]: ./report_images/hist.jpg "Histogram"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
@@ -40,8 +40,7 @@ You're reading it! and here is a link to my [project code](https://github.com/jo
 
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
+In order to get some simple statistics about the data set, I simply inspected the lengths of the different arrays comprosing the images using the python len() function.
 
 * The size of training set is 34799
 * The size of the validation set is 4410
@@ -51,7 +50,7 @@ signs data set:
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+This is a histogram showing the distribution of labels in the training set. Certain signs appear many for times in the dataset than others.
 
 ![alt text][image1]
 
